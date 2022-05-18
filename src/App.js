@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
+import Navbar from './components/Navbar';
 import TodoList from './components/TodoList';
 
 function App() {
   return (
+    <>
+    <Navbar/>
     <div className='todo-app'>
       <TodoList />
     </div>
+    </>
   );
 }
 
