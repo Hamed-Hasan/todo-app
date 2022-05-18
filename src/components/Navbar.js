@@ -1,7 +1,16 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import auth from '../firebase.init';
+import { signOut } from 'firebase/auth';
 
+import './Navbar.css'
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Navbar = () => {
+  const [user, loading, error] = useAuthState(auth);
+  const logOut = () => {
+    signOut(auth)
+  }
     return (
         <div>
        <nav class="navbar navbar-expand-lg bg-light">
@@ -11,15 +20,19 @@ const Navbar = () => {
     <div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <NavLink to='/' class="nav-link active " aria-current="page" href="#">Login</NavLink>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <NavLink to='/todo' class="nav-link" href="#">Todo</NavLink>
         </li>
+       {
+user &&
+<li onClick={logOut} class="nav-item">
+<a href="#">Sign Out</a>
+</li>
+       }
        
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
+        
       </ul>
     
     </div>
